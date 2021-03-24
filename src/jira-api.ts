@@ -26,13 +26,13 @@ const createTicketPayload = ({
   activeSprintField,
   activeSprintId,
   summary,
-  pullRequestUrl
+  description
 }: {
   projectKey: string
   activeSprintField: string
   activeSprintId: string
   summary: string
-  pullRequestUrl: string
+  description: string
 }) => {
   const issue = {
     fields: {
@@ -50,19 +50,7 @@ const createTicketPayload = ({
               {
                 type: 'text',
                 text:
-                  'Full details about the package update can be found on the '
-              },
-              {
-                type: 'text',
-                text: 'pull request',
-                marks: [
-                  {
-                    type: 'link',
-                    attrs: {
-                      href: pullRequestUrl
-                    }
-                  }
-                ]
+                  description
               }
             ]
           }
@@ -131,7 +119,7 @@ export const createJiraApiInstance = (host: string, token: string) => {
     activeSprintField: string
     transitionId: string
     summary: string
-    pullRequestUrl: string
+    description: string
   }) => {
     const payload = createTicketPayload(params)
 

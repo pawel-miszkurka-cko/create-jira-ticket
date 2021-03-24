@@ -1,5 +1,5 @@
-name: 'Peter Redmond'
-description: 'Automagically create a JIRA issue for a Dependabot PR'
+name: 'Pawel Miszkurka  '
+description: 'Automagically create a JIRA issue in active sprint'
 author: 'cko-prism'
 inputs:
   JIRA_HOST:
@@ -22,9 +22,7 @@ inputs:
     required: true
     description: 'The custom field that displays the current, active sprint of the project (eg. customfield_10122)'
     default: 'customfield_10122'
-  GITHUB_TOKEN:
-    required: true
-    description: ''
+    
 runs:
   using: 'node12'
   main: 'dist/index.js'
