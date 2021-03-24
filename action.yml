@@ -22,7 +22,19 @@ inputs:
     required: true
     description: 'The custom field that displays the current, active sprint of the project (eg. customfield_10122)'
     default: 'customfield_10122'
-    
+  JIRA_TICKET_SUMMARY:
+    required: true
+    description: 'The custom field that sets jira ticket title'
+  JIRA_TICKET_DESCRIPTION:
+    description: 'The custom field that sets jira description'
+    default: ''
+
+outputs:
+  JIRA_TICKET_ID: 
+    description: 'Jira ticket ID'
+  JIRA_TICKET_URI: 
+    description: 'Jira ticket URI' 
+
 runs:
   using: 'node12'
   main: 'dist/index.js'

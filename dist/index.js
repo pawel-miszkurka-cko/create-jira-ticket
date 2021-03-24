@@ -181,6 +181,8 @@ function run() {
             required: true
         });
         const JIRA_PROJECT_KEY = core.getInput('JIRA_PROJECT_KEY', { required: true });
+        const JIRA_TICKET_SUMMARY = core.getInput('JIRA_TICKET_SUMMARY', { required: true });
+        const JIRA_TICKET_DESCRIPTION = core.getInput('JIRA_TICKET_DESCRIPTION');
         try {
             const { getActiveSprint, createTicket } = jira_api_1.createJiraApiInstance(JIRA_HOST, JIRA_API_TOKEN);
             const activeSprint = yield getActiveSprint(JIRA_BOARD_ID);
@@ -194,10 +196,14 @@ function run() {
                 activeSprintField: JIRA_ACTIVE_SPRINT_FIELD,
                 transitionId: JIRA_TRANSITION_ID,
                 projectKey: JIRA_PROJECT_KEY,
-                summary: "Test Ticket",
-                description: "testing action"
+                summary: JIRA_TICKET_SUMMARY,
+                description: JIRA_TICKET_DESCRIPTION
             });
             core.debug(`Created ticket: ${createdTicket}`);
+            if (createdTicket) {
+                core.setOutput("JIRA_TICKET_ID", createdTicket);
+                core.setOutput("JIRA_TICKET_URI", `${JIRA_HOST}/browse/${createdTicket}`);
+            }
         }
         catch (error) {
             core.setFailed(`Failure: ${error.message}`);
